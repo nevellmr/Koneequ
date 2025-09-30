@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - 2048 Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf8ef;
+            color: #776e65;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #776e65;
+            margin: 20px 0;
+            font-size: 36px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #8f7a66;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .rank {
+            font-weight: bold;
+            width: 60px;
+            text-align: center;
+        }
+        .gold { color: #ffd700; font-weight: bold; }
+        .silver { color: #c0c0c0; font-weight: bold; }
+        .bronze { color: #cd7f32; font-weight: bold; }
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: #8f7a66;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background: #7f6a56;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th class="rank">Rank</th>
+                    <th>Player</th>
+                    <th>Best Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td class="rank">
+                        {% if loop.index == 1 %}
+                            <span class="gold">🥇</span>
+                        {% elif loop.index == 2 %}
+                            <span class="silver">🥈</span>
+                        {% elif loop.index == 3 %}
+                            <span class="bronze">🥉</span>
+                        {% else %}
+                            {{ loop.index }}
+                        {% endif %}
+                    </td>
+                    <td>{{ user.username or user.first_name }}</td>
+                    <td><strong>{{ user.best_score }}</strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/game" class="back-button">🎮 Play Game</a>
+    </div>
+</body>
+</html>
+    
